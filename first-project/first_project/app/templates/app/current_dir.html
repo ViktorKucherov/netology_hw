@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Текущая директория</title>
+    <!-- CSS -->
+    <link href="{% static 'app/css/app.css' %}" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+    <h1 class="chapterName"> Текущая директория</h1>
+    <ul class="listOfLinks">
+        {% for el in current_dir %}
+            <li>{{ el }}</li>
+            <br>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
