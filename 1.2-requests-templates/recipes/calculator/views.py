@@ -1,4 +1,6 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+import copy
 
 DATA = {
     'omlet': {
@@ -10,7 +12,7 @@ DATA = {
         'макароны, г': 0.3,
         'сыр, г': 0.05,
     },
-    'buter': {
+    'sandwich': {
         'хлеб, ломтик': 1,
         'колбаса, ломтик': 1,
         'сыр, ломтик': 1,
@@ -19,12 +21,29 @@ DATA = {
     # можете добавить свои рецепты ;)
 }
 
-# Напишите ваш обработчик. Используйте DATA как источник данных
-# Результат - render(request, 'calculator/index.html', context)
-# В качестве контекста должен быть передан словарь с рецептом:
-# context = {
-#   'recipe': {
-#     'ингредиент1': количество1,
-#     'ингредиент2': количество2,
-#   }
-# }
+
+# Create your views here.
+
+def getServingsData(number: int) -> dict:
+    result_DATA = copy.deepcopy(DATA)
+    for recipe in result_DATA.values():
+        for ingridient, count in recipe.items():
+            recipe[ingridient] = count * number
+    return result_DATA
+
+
+def index(request, recipe):
+    template = "calculator/index.html"
+    servings = int(request.GET.get('servings', 1))
+    data = getServingsData(servings)
+
+    context = {
+        'recipe': data[recipe]
+    }
+
+    return render(request=request,
+                  template_name=template,
+                  context=context)
+
+
+
