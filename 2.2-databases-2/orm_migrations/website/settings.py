@@ -76,6 +76,8 @@ DATABASES = {
         'NAME': 'netology_orm_migrations',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
     }
 }
 
@@ -103,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
 LANGUAGE_CODE = 'RU-ru'
-
+LANGUAGES = [('ru', 'russian'), ('en', 'english')]
 TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
