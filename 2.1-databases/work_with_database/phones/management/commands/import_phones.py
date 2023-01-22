@@ -30,6 +30,7 @@ class Command(BaseCommand):
             # )
 
             # Решение 2
+
             Phone.objects.create(
                 phoneModel=slugify(phone["name"]),
                 **phone
